@@ -1,0 +1,40 @@
+body {
+    background-image: url("/assets/images/posters-newspaper-background.jpg");
+    padding-top: 70px;
+}
+
+.deleteNote {
+	display: inline-block;
+}
+
+.previousNotes {
+    display: inline-block;
+    width: 90%
+}
+
+#scrape {
+    margin: 8px 0px;
+}
+
+.svg{
+    height: 50px;
+    width: 50px;
+}
+.jumbotron{
+    background: url(../images/tidbits.gif);
+    height: 250px;
+    font-family: 'Roboto', sans-serif;
+    color: white;
+}
+
+.panel-default > .panel-heading-custom {
+    background: url(../images/tidbits.gif);
+    color: #fff; }
+
+.h1{
+    color: black;
+}
+
+.panel-default > .btn-save-custom{
+    background-color: blue;
+}
