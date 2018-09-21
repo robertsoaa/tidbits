@@ -43,11 +43,10 @@ app.engine("handlebars", exphbs({
 }));
 app.set("view engine", "handlebars");
 
-//Toggle for web development and mLab deployment
-
-mongoose.connect("mongodb://robertsoaa:dbuser1@ds111063.mlab.com:11063/nytimesscraped", { useMongoClient: true });
+//mLab deployment (continuing to test this section...connection to mLAB is incomplete)
+//mongoose.connect("mongodb://robertsoaa:dbuser1@ds111063.mlab.com:11063/nytimesscraped", { useMongoClient: true });
+mongoose.connect("mongodb://rosotto:J0sh85Ni@ds153851.mlab.com:53851/nytimesscraped", { useMongoClient: true });
 //mongoose.connect("mongodb://localhost:27017/nytimesmongoosescrape", { useMongoClient: true });
-//mongoose.connect("mongodb://localhost:27017/devnytscrapeddb", { useMongoClient: true });
 var db = mongoose.connection;
 
 // Show any mongoose errors
