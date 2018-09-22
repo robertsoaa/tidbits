@@ -40,6 +40,11 @@ app.use(bodyParser.urlencoded({
     extended: false
 }));
 
+// =================================================================
+// Configure page favicon and public web folder
+// =================================================================
+var favicon = require('serve-favicon');
+app.use(favicon(path.join(__dirname,'public','assets','images','favicon.ico')));
 // Make public a static dir
 app.use(express.static(__dirname + "/public"));
 //app.use(express.static("public"));
@@ -52,6 +57,10 @@ app.engine("handlebars", exphbs({
     partialsDir: path.join(__dirname, "/views/layouts/partials")
 }));
 app.set("view engine", "handlebars");
+
+// =================================================================
+// Mongoose Connection
+// =================================================================
 
 //mLab deployment (or localhost mongo connection for development)
 mongoose.connect("mongodb://robertsoaa:dbuser1@ds111063.mlab.com:11063/heroku_ggz26b9g", { useMongoClient: true });
