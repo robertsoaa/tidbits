@@ -32,7 +32,8 @@ app.use(bodyParser.urlencoded({
 }));
 
 // Make public a static dir
-app.use(express.static("public"));
+app.use(express.static(__dirname + "/public"));
+//app.use(express.static("public"));
 
 // Set Handlebars.
 var exphbs = require("express-handlebars");
@@ -44,9 +45,8 @@ app.engine("handlebars", exphbs({
 app.set("view engine", "handlebars");
 
 //mLab deployment (continuing to test this section...connection to mLAB is incomplete)
-//mongoose.connect("mongodb://robertsoaa:dbuser1@ds111063.mlab.com:11063/nytimesscraped", { useMongoClient: true });
-mongoose.connect("mongodb://rosotto:J0sh85Ni@ds153851.mlab.com:53851/nytimesscraped", { useMongoClient: true });
-//mongoose.connect("mongodb://localhost:27017/nytimesmongoosescrape", { useMongoClient: true });
+mongoose.connect("mongodb://robertsoaa:dbuser1@ds111063.mlab.com:11063/heroku_ggz26b9g", { useMongoClient: true });
+//mongoose.connect("mongodb://localhost/nytimesmongoosescrape", { useMongoClient: true });
 var db = mongoose.connection;
 
 // Show any mongoose errors
@@ -82,24 +82,31 @@ app.get("/saved", function(req, res) {
   });
 });
 
-// A GET request to scrape the echojs website
-app.get("/scrape", function(req, res) {
-  // First, we grab the body of the html with request
-  request("https://www.nytimes.com/", function(error, response, html) {
-    // Then, we load that into cheerio and save it to $ for a shorthand selector
-    var $ = cheerio.load(html);
-    // Now, we grab every h2 within an article tag, and do the following:
-    $("article").each(function(i, element) {
+var scrapeSite = "https://www.nytimes.com/section/technology?WT.nav=page&action=click&contentCollection=Tech&module=HPMiniNav&pgtype=Homepage&region=TopBar";
 
-      // Save an empty result object
-      var result = {};
+    // GET request to scrape the echojs website
+    app.get("/scrape", function (req, res) {
+        // Grabs the body of the html with request
+        request(scrapeSite, function (error, response, html) {
+            // Loads the request into cheerio and saves it to $ for a shorthand selector
+            var $ = cheerio.load(html);
+            // Grab every div within an article tag, and do the following:
+            $("a.story-link").each(function (i, element) {
 
-      // Add the title and summary of every link, and save them as properties of the result object
-      result.title = $(this).children("h2").text();
-      result.summary = $(this).children(".summary").text();
-      result.link = $(this).children("h2").children("a").attr("href");
+                // Save an empty result object
+                var result = {};
 
-      // Using our Article model, create a new entry
+                //Jumping into div with class story-meta inside a tag,
+                //grabbing the h2 child of that div
+                result.title = $("div.story-meta", this).children("h2").text();
+                //Grabbing the attr href from the a tag
+                result.link = $(this).attr("href");
+                //Jumping into child's child p tag with class summary
+                result.summary = $("p.summary", this).text();
+
+
+
+// Using our Article model, create a new entry
       // This effectively passes the result object to the entry (and the title and link)
       var entry = new Article(result);
 

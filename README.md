@@ -1,8 +1,8 @@
 # MongoScraper
-Northwestern Coding Bootcamp Spring 2018 Homework Assignment Week18: NYTimes Scraper using MongoDB and Cheerio
+UCF Coding Bootcamp Homework Assignment Week18: NYTimes Scraper using MongoDB and Cheerio
 
 ## Overview
-This application will scrape the New York Times, pulling in recent news articles for onto the web page. The user will have the option of saving new articles, deleting previously saved articles and adding or deleting notes for each saved article.
+This application scrapes the New York Times Website and displays recent technology news articles in a list. A user has the option of saving new articles, deleting previously saved articles and adding or deleting notes for each saved article.
 
 ### Initial Landing Page with Null DB
 ![image](https://user-images.githubusercontent.com/35242379/43341106-1656929a-91a4-11e8-99f4-6ec748e46b87.png)
