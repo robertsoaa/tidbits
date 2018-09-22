@@ -44,7 +44,7 @@ app.engine("handlebars", exphbs({
 }));
 app.set("view engine", "handlebars");
 
-//mLab deployment (continuing to test this section...connection to mLAB is incomplete)
+//mLab deployment (or localhost mongo connection for development)
 mongoose.connect("mongodb://robertsoaa:dbuser1@ds111063.mlab.com:11063/heroku_ggz26b9g", { useMongoClient: true });
 //mongoose.connect("mongodb://localhost/nytimesmongoosescrape", { useMongoClient: true });
 var db = mongoose.connection;
